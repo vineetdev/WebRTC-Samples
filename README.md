@@ -10,3 +10,6 @@ Have covered the Primary APIs used:
     -- This has two folders <br />
      Step_01: Demo of RTCPeerConnection within one browser tab. <br />
      Step_02: Demo showing two browser tabs talking to each other. <br />
+
+- RTCDataChannel <br />
+     Demo showing two browser tabs talking to each other. <br />
