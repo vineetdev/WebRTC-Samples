@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>getUserMedia</title>
+  <style>
+	h1 {
+      text-align: center;
+      font-family: Roboto, sans-serif; 
+	  text-decoration: underline;
+	  color: #000080; /* Dark blue color */
+    }
+	p {
+      text-align: center;
+      font-style: italic;
+    }
+    video {
+      display: block;
+      margin: 0 auto;
+      width: 50%; /* Adjust the width as needed */
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>getUserMedia Example</h1>
+  <p>WebRTC Deepdive</p>
+  <video id="video" autoplay></video>
+  <script>
+    const videoElement = document.getElementById('video');
+	const simpleMediaStreamConstraints = { video: true, audio: false };
+	const mediaStreamConstraints = {video:{width:{min:1280},height:{min:720}}, audio:false};
+
+	console.log("capturing media ");
+    navigator.mediaDevices.getUserMedia(simpleMediaStreamConstraints)
+      .then(stream => { //stream is the returned media stream
+        videoElement.srcObject = stream;
+		console.log("stream captured is ", stream);
+      })
+      .catch(error => {
+        console.error('Error accessing video stream:', error);
+      });
+  </script>
+</body>
+</html>
