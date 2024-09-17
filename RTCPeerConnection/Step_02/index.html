@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Peer connection between two tabs</title>
+	<meta name="mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="css/main.css"/>
+
+</head>
+
+<body>
+  <h1>getUserMedia</h1>
+  <p>WebRTC Deepdive</p>
+<div id="container">
+    <video id="localVideo" playsinline autoplay muted></video>
+    <video id="remoteVideo" playsinline autoplay></video>
+
+    <div class="box">
+        <button id="startButton">Start</button>
+        <button id="hangupButton">Hang Up</button>
+    </div>
+
+    <p>Click the start button in two tabs (of the same browser; can be in different windows) to make a call</p>
+</div>
+
+<script src="js/main.js" async></script>
+</body>
+</html>

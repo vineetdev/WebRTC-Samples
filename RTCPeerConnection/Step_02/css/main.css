@@ -1,0 +1,64 @@
+/* Ensure body takes full width and centers all content */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Center the video */
+video {
+  --width: 45%;
+  width: var(--width);
+  height: calc(var(--width) * 0.75);
+  margin-bottom: 20px;
+}
+
+/* Center the button container */
+div.button-container {
+  display: flex;
+  justify-content: center; /* Center the buttons */
+  margin-top: 20px; /* Space above the buttons */
+  width: 100%; /* Ensure the button container takes full width */
+}
+
+/* Button styles */
+button {
+  margin: 0 20px; /* Equal spacing between buttons */
+  width: 83px;
+}
+
+button#hangupButton {
+  margin: 0; /* Reset margin for hangup button */
+}
+
+/* Typography */
+h1, p {
+  text-align: center;
+  font-family: Roboto, sans-serif;
+}
+
+h1 {
+  color: #000080; /* Dark blue */
+  text-decoration: underline;
+}
+
+p {
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 200px) {
+  button {
+    width: 83px;
+    margin: 0 11px 10px 0;
+  }
+
+  video {
+    height: 90px;
+    width: calc(50% - 7px);
+    margin: 0 0 10px 0;
+  }
+}
