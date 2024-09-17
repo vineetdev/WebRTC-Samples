@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Transmit text (between two tabs)</title>
+    <link rel="stylesheet" href="css/main.css"/>
+</head>
+
+<body>
+
+<div id="container">
+
+    <h1>Transmit text using DataChannel</h1>
+    <p>WebRTC Deepdive</p>
+    <div id="buttons">
+        <button id="startButton" disabled>Start</button>
+        <button id="sendButton" disabled>Send</button>
+        <button id="closeButton" disabled>Stop</button>
+    </div>
+
+    <div id="sendReceive">
+        <div id="send">
+            <h2>Send</h2>
+            <textarea id="dataChannelSend" disabled
+                      placeholder="Press Start, enter some text, then press Send."></textarea>
+        </div>
+        <div id="receive">
+            <h2>Receive</h2>
+            <textarea id="dataChannelReceive" disabled></textarea>
+        </div>
+    </div>
+
+    <p>Open the sample in two tabs (of the same browser), then click start in the first tab and
+    send messages back and forth.</p>
+</div>
+<script src="js/main.js" async></script>
+</body>
+</html>
