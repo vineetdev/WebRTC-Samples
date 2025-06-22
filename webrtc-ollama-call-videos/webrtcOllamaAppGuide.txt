@@ -1,0 +1,141 @@
+# WebRTC Ollama Video Call App - Complete Package
+
+## 📁 Project Structure
+Create this folder structure on your computer:
+
+```
+webrtc-ollama-call/
+├── package.json
+├── server.js
+├── public/
+│   ├── index.html
+│   ├── style.css
+│   ├── script.js
+│   └── waveform.js
+└── README.md
+```
+
+Looking at your code, this is a WebRTC-based AI Video Call Application that integrates with Ollama (a local AI model runner) to create an interactive video chat experience with an AI assistant. Let me break down the high-level architecture and then we'll dive deeper.
+High-Level Overview
+This is a real-time web application that simulates a video call interface where users can interact with an AI assistant (Llama 3.2 model) through:
+
+Text chat
+Voice input (speech recognition)
+Visual feedback with animated avatar videos
+Text-to-speech responses
+
+File Contents & Architecture
+Backend (server.js)
+
+Express.js server with Socket.IO for real-time communication
+Integrates with Ollama API running locally on port 11434
+Handles streaming AI responses from Llama 3.2 model
+WebRTC signaling support (though not fully utilized)
+
+Frontend Structure:
+
+index.html - Main UI with video panels, chat interface, and controls
+script.js - Core application logic and WebRTC handling
+styles.css - Modern glassmorphism design with animations
+waveform.js - Simple state manager for avatar video switching
+
+Key Features:
+
+Video call simulation (user's camera + AI avatar videos)
+Real-time streaming AI responses
+Speech recognition for voice input
+Text-to-speech for AI responses
+Visual states: idle, thinking, speaking, listening
+
+Code Flow
+The app follows this flow:
+
+Connection: Client connects via Socket.IO
+Call Start: User grants camera/mic permissions
+Interaction: User sends text/voice → Server forwards to Ollama → Streaming response back
+Visual Feedback: Avatar videos change based on AI state
+Audio Output: AI responses are spoken using browser TTS
+
+
+# WebRTC Ollama Video Call App
+
+A real-time video call application that lets you have conversations with Ollama AI (llama3.2) through WebRTC.
+
+## Features
+
+- 🎥 Real-time video call interface
+- 🤖 AI conversation with Ollama (llama3.2)
+- 🌊 Animated waveform visualization for AI responses
+- 🎤 Microphone mute/unmute controls
+- 📹 Camera on/off controls
+- 💬 Real-time chat with AI
+- 🔊 Text-to-speech for AI responses
+- 📱 Responsive design
+
+## Prerequisites
+
+1. **Node.js** (v14 or higher)
+2. **Ollama** installed on Windows
+3. **llama3.2** model downloaded in Ollama
+
+## Setup Instructions
+
+### 1. Install Ollama (if not already installed)
+
+1. Download Ollama for Windows from: https://ollama.ai/download
+2. Install and run Ollama
+3. Open Command Prompt and run:
+   ```bash
+   ollama pull llama3.2
+   ```
+
+### 2. Install and Run the App
+
+1. Create a folder called `webrtc-ollama-call`
+2. Copy all the files from this package into the folder
+3. Open Command Prompt/Terminal in the folder
+4. Install dependencies:
+   ```bash
+   npm install
+   ```
+5. Start the server:
+   ```bash
+   npm start
+   ```
+6. Open your browser and go to: http://localhost:3000
+
+## Usage
+
+1. Make sure Ollama is running (check by visiting http://localhost:11434 in browser)
+2. Click "Start Call" to begin the video session
+3. Allow camera/microphone permissions when prompted
+4. Type messages in the chat box to talk with the AI
+5. The AI will respond with text and speech
+6. Use the mute/camera buttons to control your media
+7. Click "End Call" to finish the session
+
+## Troubleshooting
+
+### Ollama Connection Issues
+- Ensure Ollama is running: `ollama serve`
+- Check if llama3.2 is installed: `ollama list`
+- Verify Ollama is accessible at http://localhost:11434
+
+### Camera/Microphone Issues
+- Grant browser permissions for camera and microphone
+- Try using Chrome or Firefox for best WebRTC support
+- Check if other applications are using the camera/microphone
+
+### Audio Issues
+- If text-to-speech doesn't work, check browser audio settings
+- Some browsers may block autoplay - interact with the page first
+- Try refreshing the page if audio stops working
+
+## License
+
+MIT License - feel free to modify and distribute
+
+---
+
+**Made with ❤️ for AI-powered video communication**
+```

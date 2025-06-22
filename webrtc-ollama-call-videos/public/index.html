@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC GenAI Video Call</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎥 Video Call with GenAI Ollama</h1>
+            <div class="status" id="status">Disconnected</div>
+        </header>
+
+        <div class="call-container" id="callContainer" style="display: none;">
+            <div class="video-section">
+                <div class="video-panel user-panel">
+                    <h3>You</h3>
+                    <video id="localVideo" autoplay muted playsinline></video>
+                    <div class="user-controls">
+                        <button id="muteBtn" class="control-btn">🎤</button>
+                        <button id="cameraBtn" class="control-btn">📹</button>
+                        <button id="voiceBtn" class="control-btn" title="Voice Input">🎤</button>
+                    </div>
+                    <div class="voice-status" id="voiceStatus">Click to start voice input</div>
+                </div>
+
+                <div class="video-panel ai-panel">
+                    <h3>AI Assistant (llama3.2)</h3>
+					<div class="video-container">
+						<video id="remoteVideo" autoplay muted loop playsinline>
+						<source src="idle.mp4" type="video/mp4">
+						</video>
+						<canvas id="waveform" width="400" height="300"></canvas>
+					</div>
+					<div class="ai-avatar">
+					    <!--canvas id="waveform" width="400" height="300"></canvas-->
+                        <div class="ai-status" id="aiStatus">Listening...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-section">
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input-container">
+                    <input type="text" id="chatInput" placeholder="Type your message or use voice input..." />
+                    <button id="sendBtn" class="primary-btn">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="startCallBtn" class="primary-btn">📞 Start Call</button>
+            <button id="endCallBtn" class="primary-btn" style="display: none;">📞 End Call</button>
+        </div>
+
+        <div class="info-panel">
+            <h3>Instructions:</h3>
+            <ul>
+                <li>Make sure Ollama is running on your Windows machine</li>
+                <li>Ensure llama3.2 model is installed in Ollama</li>
+                <li>Click "Start Call" to begin video chat with AI</li>
+                <li>Type messages or use voice input to interact with the AI</li>
+                <li>Click the microphone button to start/stop voice recognition</li>
+                <li>AI responses will be spoken using text-to-speech</li>
+                <li><strong>Note:</strong> Voice recognition requires HTTPS or localhost</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="waveform.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
