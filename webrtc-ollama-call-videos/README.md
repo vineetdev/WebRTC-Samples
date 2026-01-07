@@ -1,7 +1,7 @@
 markdown
 # WebRTC Ollama Video Call App
 
-A real-time video call application that lets you have conversations with Ollama AI (llama3.2) through WebRTC.
+A real-time video call application that lets you have conversations with Ollama LLM (llama3.2) Model through WebRTC.
 
 ## Features
 
@@ -13,6 +13,100 @@ A real-time video call application that lets you have conversations with Ollama 
 - 💬 Real-time chat with AI
 - 🔊 Text-to-speech for AI responses
 - 📱 Responsive design
+
+## Call Flow
+
+The following diagram illustrates the high-level call flow of the application:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        1. CALL INITIALIZATION                           │
+└─────────────────────────────────────────────────────────────────────────┘
+
+    👤 User
+     │
+     │ Click "Start Call"
+     ▼
+┌─────────────────┐
+│  🌐 Browser     │
+│  (Media Access) │
+└────────┬────────┘
+         │ Video/Audio Stream
+         ▼
+┌─────────────────┐         Socket.IO          ┌─────────────────┐
+│  📱 Client App  │ ──────────────────────────> │  🖥️ Server      │
+│  (script.js)    │ <────────────────────────── │  (Node.js)      │
+└─────────────────┘         Connection          └─────────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        2. USER SENDS MESSAGE                            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+    👤 User
+     │
+     │ Type message / Voice input
+     ▼
+┌─────────────────┐
+│  📱 Client App  │
+└────────┬────────┘
+         │ emit('ai-message')
+         ▼
+┌─────────────────┐
+│  🖥️ Server      │
+└────────┬────────┘
+         │ Acknowledge
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     3. AI PROCESSING (STREAMING)                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────┐         POST /api/generate          ┌─────────────────┐
+│  🖥️ Server      │ ───────────────────────────────────> │  🤖 Ollama AI   │
+│  (Node.js)      │         (stream: true)               │  (llama3.2)     │
+└────────┬────────┘                                       └────────┬────────┘
+         │                                                         │
+         │ <─────────────────────────────────────────────────────── │
+         │         Stream response chunks (JSON lines)             │
+         │                                                          │
+         │  ┌──────────────────────────────────────────────┐      │
+         │  │  For each chunk:                              │      │
+         │  │  • Parse JSON chunk                           │      │
+         │  │  • Emit 'ai-response-chunk' via Socket.IO     │      │
+         │  └──────────────────────────────────────────────┘      │
+         │                                                          │
+         │                                                          │
+         ▼                                                          ▼
+┌─────────────────┐                                       ┌─────────────────┐
+│  📱 Client App  │ <─────────────────────────────────── │  🤖 Ollama AI   │
+│                 │      Real-time chunk updates          │                 │
+└─────────────────┘                                       └─────────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        4. RESPONSE DELIVERY                              │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────┐
+│  📱 Client App  │
+│                 │
+│  • Update chat  │
+│  • Buffer TTS   │
+│  • Display text │
+└────────┬────────┘
+         │
+         │ Play audio
+         ▼
+┌─────────────────┐
+│  🌐 Browser     │
+│  (TTS Audio)    │
+└────────┬────────┘
+         │
+         │ Audio output
+         ▼
+    👤 User
+```
 
 ## Prerequisites
 
